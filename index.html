@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="js/nv.d3.js"></script>
+    
+    <style>
+        svg.line-graph {
+            height: 400px;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="tabs">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#bsd-test-rec-tab" role="tab" data-toggle="tab">Rec</a></li>
+            <li><a href="#bsd-test-ue-tab" role="tab" data-toggle="tab">UE</a></li>
+            <li><a href="#bsd-test-asa-tab" role="tab" data-toggle="tab">ASA</a></li>
+            <li><a href="#bsd-test-ev-tab" role="tab" data-toggle="tab">EV</a></li>
+            <li><a href="#bsd-test-rgbsse-tab" role="tab" data-toggle="tab">rgbSSE</a></li>
+            <li><a href="#bsd-test-xysse-tab" role="tab" data-toggle="tab">xySSE</a></li>
+            <li><a href="#bsd-test-co-tab" role="tab" data-toggle="tab">CO</a></li>
+            <li><a href="#bsd-test-t-tab" role="tab" data-toggle="tab">t</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active fade in" id="bsd-test-rec-tab">
+                <svg id="bsd-test-rec" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-ue-tab">
+                <svg id="bsd-test-ue" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-co-tab">
+                <svg id="bsd-test-co" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-asa-tab">
+                <svg id="bsd-test-asa" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-t-tab">
+                <svg id="bsd-test-t" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-ev-tab">
+                <svg id="bsd-test-ev" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-rgbsse-tab">
+                <svg id="bsd-test-rgbsse" class="line-graph"></svg>
+            </div>
+            <div class="tab-pane fade in" id="bsd-test-xysse-tab">
+                <svg id="bsd-test-xysse" class="line-graph"></svg>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#tabs ul a:first').tab('show');
+        $('#tabs ul a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+
+        d3.json('data/bsd-test.csv.json', function(data) {
+            function tabs_addGraph(metric, id) {
+                nv.addGraph(function() {
+                    var chart = nv.models.lineChart()
+                        .x(function(d) {
+                            return d[0];
+                        })
+                        .y(function(d) {
+                            return d[1];
+                        });
+                    
+                    d3.select('#' + id)
+                        .datum(data[metric])
+                        .call(chart);
+
+                    nv.utils.windowResize(chart.update);
+
+                    return chart;
+                });
+            }
+            
+            tabs_addGraph('Rec', 'bsd-test-rec');
+            tabs_addGraph('UE', 'bsd-test-ue');
+            tabs_addGraph('avgCO', 'bsd-test-co');
+            tabs_addGraph('ASA', 'bsd-test-asa');
+            tabs_addGraph('t', 'bsd-test-t');
+            tabs_addGraph('EV', 'bsd-test-ev');
+            tabs_addGraph('xySSE', 'bsd-test-xysse');
+            tabs_addGraph('rgbSSE', 'bsd-test-rgbsse');
+        });
+    });
+</script>
+</body></html>
