@@ -1,16 +1,19 @@
 # NVD3 Superpixel Algorithm Comparison
 
-An interactive comparison of different superpixel algorithms as presented in [1] based on [nvd3](http://nvd3.org/):
+An interactive comparison of different superpixel algorithms as presented in [1] and [2] based on [nvd3](http://nvd3.org/):
 
     [1] D. Stutz, A. Hermans, B. Leibe.
         Superpixel Segmentation using Depth Information.
         Bachelor Thesis, RWTH Aachen University, SEptember 2014.
+	[2] D. Stutz.
+		Superpixel Segmentation: An Evaluation.
+		Pattern Recognition (J. Gall, P. Gehler, B. Leibe (Eds.)), Lecture Notes in Computer Science, vol. 9358, pages 555 - 562, 2015.
 
 The thesis is available at [http://davidstutz.de/projects/superpixelsseeds/](http://davidstutz.de/projects/superpixelsseeds/) as well as on GitHub: [davdstutz/bachelor-thesis-superpixels](https://github.com/davidstutz/bachelor-thesis-superpixels).
 
-This repository contains the corresponding evaluation results in `data/` which have been obtained using an extended version of the Berkeley Segmentation Benchmark [2], available on GitHub [here](https://github.com/davidstutz/extended-berkeley-segmentation-benchmark).
+This repository contains the corresponding evaluation results in `data/` which have been obtained using an extended version of the Berkeley Segmentation Benchmark [3], available on GitHub [here](https://github.com/davidstutz/extended-berkeley-segmentation-benchmark).
 
-    [2] P. Arbeláez, M. Maire, C. Fowlkes, J. Malik.
+    [3] P. Arbeláez, M. Maire, C. Fowlkes, J. Malik.
         Contour detection and hierarchical image segmentation.
         Transactions on Pattern Analysis and Machine Intelligence, volume 33, number 5, pages 898–916, 2011.
 
